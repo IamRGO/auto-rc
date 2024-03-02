@@ -1,0 +1,4 @@
+#!/bin/sh
+# use current directory
+scp pi@192.168.2.38:/home/pi/opencv-fpv-server/saves.zip /Users/michaelgo/Car/saves.zip
+unzip -o /Users/michaelgo/Car/saves.zip -d /Users/michaelgo/Car/
