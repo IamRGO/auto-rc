@@ -33,13 +33,10 @@ void setup() {
 
 void loop() {
   radio.startListening();
-  
+
   while (radio.available()) {
     int data[2];
     radio.read(&data, sizeof(data));
-//    Serial.print(data[0]);
-//    Serial.print(" : ");
-//    Serial.println(data[1]);
 
     int steering_val = map(data[0], 3, 1003, 40, 130);
     servo.write(steering_val);
@@ -50,9 +47,9 @@ void loop() {
       if (data[1] > 980) {
         data[1] = 980;
       }
-      throttle_val = map(data[1], 503, 980, 90, 255);  
+      throttle_val = map(data[1], 503, 980, 90, 255);
     }
-    
+
     analogWrite(motor_a, throttle_val);
   }
 
