@@ -1,0 +1,18 @@
+#include <Arduino.h>
+#include "send.h"
+
+void Send :: give(int steer, int throttle) {
+  Serial.setTimeout(100);
+  if (Serial.available()) {
+    String input_data = Serial.readString();
+    input_data.trim();
+
+    if (input_data == "stats") {
+      Serial.println(steer);
+      Serial.println(throttle);
+    } else {
+      Serial.println("I don't understand");
+      Serial.println(input_data);
+    }
+  }
+}
