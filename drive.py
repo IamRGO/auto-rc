@@ -42,9 +42,13 @@ while True:
     data.parse_image(result)
   ]
 
-  result = model.predict(np.array(input_list, dtype=np.float32))
+  result = model.predict(
+    np.array(input_list, dtype=np.float32),
+    verbose=0,
+  )
+  result = result[0]
 
-  print(result)
+  print(result[0])
   steering = int(result[0][0] * 100)
 
   if steering in range(45, 55):
