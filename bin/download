@@ -1,5 +1,8 @@
 #!/bin/sh
 # use current directory
-scp pi@192.168.2.38:/home/pi/opencv-fpv-server/saves.zip ~/auto-rc/saves.zip
-unzip -o ~/auto-rc/saves.zip -d ~/auto-rc/
-rm -rf ~/auto-rc/saves.zip
+scp pi@192.168.2.38:/home/pi/auto-rc/temp.zip ~/auto-rc/temp.zip
+rm -rf temp
+unzip -o ~/auto-rc/temp.zip -d ~/auto-rc/
+rm -rf ~/auto-rc/temp.zip
+
+# bin/download 
