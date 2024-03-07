@@ -22,9 +22,7 @@ camera.set(cv2.CAP_PROP_FPS, 30)
 
 print("loading model...")
 model = Sequential([
-  Dense(784, activation='relu', input_dim=320 * 240),
-  Dropout(0.2),
-  Dense(439, activation='relu'),
+  Dense(512, activation='relu', input_dim=320 * 240),
   Dropout(0.2),
   Dense(242, activation='relu'),
   Dropout(0.2),
