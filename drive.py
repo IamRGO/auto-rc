@@ -65,7 +65,7 @@ while True:
   print(result)
 
   steering_val = np.interp(result[0], [0.0, 1.0], [40, 130])
-  throttle_val = np.interp(result[1], [0.0, 1.0], [90, 220])
+  throttle_val = np.interp(result[1], [0.0, 1.0], [90, 180])
 
   if result[1] == 0:
       throttle_val = 0
