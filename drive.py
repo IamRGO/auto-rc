@@ -3,6 +3,7 @@ import cv2
 import numpy as np
 from os import listdir
 from os.path import isfile, join
+import serial
 
 import tensorflow as tf
 from tensorflow.keras import Sequential
@@ -26,6 +27,9 @@ model = Sequential([
 
 model.load_weights("brain")
 
+# connects to arduino
+arduino = serial.Serial(port='/dev/ttyUSB0', baudrate=9600, timeout=5)
+
 while True:
   _, frame = camera.read()  # read the camera frame
   image = cv2.resize(frame, (128, 96))
@@ -46,19 +50,25 @@ while True:
     np.array(input_list, dtype=np.float32),
     verbose=0,
   )
+
   result = result[0]
 
-  print(result[0])
-  steering = int(result[0][0] * 100)
+  print(result[0], result)
 
-  if steering in range(45, 55):
-    print("Turn STRAIGHT")
-  elif steering in range(0, 45):
-    print("Turn LEFT")
-  else:
-    print("Turn RIGHT")
+  steering_val = np.interp(result[1], [0.0, 1.0], [40, 130])
+  throttle_val = np.interp(result[2], [0.0, 1.0], [90, 250])
 
-  time.sleep(1)
+  if result[2] == 0:
+      throttle_val = 0
 
+  message = "D" + str(steering_val) + " " + str(throttle_val)
+  arduino.write(message.encode("UTF-8"))
 
+  # if steering in range(45, 55):
+  #   print("Turn STRAIGHT")
+  # elif steering in range(0, 45):
+  #   print("Turn LEFT")
+  # else:
+  #   print("Turn RIGHT")
 
+  time.sleep(0.1)

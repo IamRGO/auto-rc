@@ -31,6 +31,7 @@ void setup() {
   pinMode(motor_b, OUTPUT);
 
   Serial.begin(9600);
+  Serial.setTimeout(100);
   analogWrite(motor_b, 0);
 }
 
@@ -73,14 +74,12 @@ void loop() {
       analogWrite(motor_a, 0);
     }
 
-    // fix this
     if (throttle_val == 0) {
       send_info.give(steering_val, -reverse_throttle_val);
     }
     else if (reverse_throttle_val == 0) {
       send_info.give(steering_val, throttle_val);
     }
-
     else {
       send_info.give(steering_val, 0);
     }
