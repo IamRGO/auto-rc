@@ -1,0 +1,3 @@
+#!/bin/sh
+scp -i ~/.ssh/id_rsa brain.data-00000-of-00001 pi@192.168.2.38:~/auto-rc/brain.data-00000-of-00001
+scp -i ~/.ssh/id_rsa brain.index pi@192.168.2.38:~/auto-rc/brain.index

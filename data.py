@@ -1,4 +1,5 @@
 import cv2
+import numpy as np
 
 def read_output(file_path):
   file = open(file_path, 'r')
@@ -7,10 +8,10 @@ def read_output(file_path):
 
   steering, throttle = data.split(":")
   steering = int(steering) # range 40, 131
-  steering = (steering - 40) / (131 - 40)
+  steering = np.interp(steering, [40, 130], [0.0, 1.0])
 
-  throttle = int(throttle) # range 87, 250
-  throttle = (throttle - 87) / (180 - 87)
+  throttle = int(throttle) # range 90, 180
+  throttle = np.interp(throttle, [90, 180], [0.0, 1.0])
 
   return [steering, throttle]
 
