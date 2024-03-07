@@ -10,7 +10,7 @@ def read_output(file_path):
   steering = (steering - 40) / (131 - 40)
 
   throttle = int(throttle) # range 87, 250
-  throttle = (throttle - 87) / (250 - 87)
+  throttle = (throttle - 87) / (180 - 87)
 
   return [steering, throttle]
 

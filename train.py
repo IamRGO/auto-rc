@@ -38,7 +38,7 @@ output_list = np.array(output_list, dtype=np.float32)
 model = Sequential([
   Dense(376, activation='relu', input_dim=len(input_list[0])),
   Dropout(0.2),
-  Dense(242, activation='relu'),
+  Dense(127, activation='relu'),
   Dropout(0.2),
   Dense(42, activation='relu'),
   Dropout(0.2),
