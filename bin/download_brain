@@ -1,0 +1,5 @@
+#!/bin/sh
+scp -i ~/.ssh/id_rsa michael@192.168.2.200:~/auto-rc/brain.data-00000-of-00001 brain.data-00000-of-00001
+scp -i ~/.ssh/id_rsa michael@192.168.2.200:~/auto-rc/brain.index brain.index
+
+rm -rf processed_temp.zip

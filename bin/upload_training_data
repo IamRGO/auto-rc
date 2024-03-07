@@ -1,0 +1,6 @@
+#!/bin/sh
+zip -r processed_temp.zip processed_temp
+
+scp -i ~/.ssh/id_rsa processed_temp.zip michael@192.168.2.200:~/auto-rc/processed_temp.zip
+
+rm -rf processed_temp.zip
