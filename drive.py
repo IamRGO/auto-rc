@@ -1,3 +1,4 @@
+print("loading libraries...")
 import time
 import cv2
 import numpy as np
@@ -11,11 +12,15 @@ from tensorflow.keras.layers import Dense, Conv2D, MaxPooling2D, Flatten
 
 import data
 
+print("Staring camera...")
+
 camera = cv2.VideoCapture(0)
 camera.set(cv2.CAP_PROP_FRAME_WIDTH, 640)
 camera.set(cv2.CAP_PROP_FRAME_HEIGHT, 480)
 camera.set(cv2.CAP_PROP_FPS, 30)
 
+
+print("loading model...")
 model = Sequential([
   Dense(494, activation='relu', input_dim=128 * 96),
   Dense(128, activation='relu'),
@@ -30,7 +35,9 @@ model.load_weights("brain")
 # connects to arduino
 arduino = serial.Serial(port='/dev/ttyUSB0', baudrate=9600, timeout=5)
 
+input("press enter to begin driving...")
 while True:
+  print("driving...")
   _, frame = camera.read()  # read the camera frame
   image = cv2.resize(frame, (128, 96))
   hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
