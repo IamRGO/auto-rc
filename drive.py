@@ -14,7 +14,7 @@ import data
 
 print("Staring camera...")
 
-camera = cv2.VideoCapture(0)
+camera = cv2.VideoCapture(-1)
 camera.set(cv2.CAP_PROP_FRAME_WIDTH, 128)
 camera.set(cv2.CAP_PROP_FRAME_HEIGHT, 96)
 camera.set(cv2.CAP_PROP_FPS, 30)
