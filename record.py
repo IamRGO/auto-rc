@@ -30,4 +30,3 @@ while True:
     print("data collected", count)
     count += 1
 
-    # time.sleep(0.3334)
