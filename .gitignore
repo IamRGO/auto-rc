@@ -1,4 +1,6 @@
 .DS_Store
 tmp
 temp
+processed_temp
+processed
 __pycache__/

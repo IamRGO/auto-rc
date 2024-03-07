@@ -46,4 +46,5 @@ void loop() {
       servo.write(auto_steer);
     }
   }
+  delay(20);
 }

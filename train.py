@@ -12,13 +12,14 @@ import data
 input_list = []
 output_list = []
 
-for i in range(1918):
-  if i == 949:
-    continue
+print("Loading images...")
 
+for i in range(522):
   i = str(i)
 
-  output_data = data.read_output("temp/data_" + i + ".txt")
+  print("loading...", i)
+
+  output_data = data.read_output("processed_temp/data_" + i + ".txt")
 
   if output_data == None:
     continue
@@ -28,20 +29,18 @@ for i in range(1918):
   output_list.append(output_data)
 
   input_list.append(
-    data.read_input('temp/result_frame_' + i + '.png')
+    data.read_input('processed_temp/frame_' + i + '.png')
   )
 
-input_list = np.array(input_list[200:], dtype=np.float32)
-output_list = np.array(output_list[200:], dtype=np.float32)
-validation_input_list = np.array(input_list[:200], dtype=np.float32)
-validation_output_list = np.array(output_list[:200], dtype=np.float32)
+input_list = np.array(input_list[20:], dtype=np.float32)
+output_list = np.array(output_list[20:], dtype=np.float32)
+validation_input_list = np.array(input_list[:20], dtype=np.float32)
+validation_output_list = np.array(output_list[:20], dtype=np.float32)
 
 model = Sequential([
-  Dense(494, activation='relu', input_dim=len(input_list[0])),
-  Dense(128, activation='relu'),
+  Dense(128, activation='relu', input_dim=len(input_list[0])),
   Dense(64, activation='relu'),
   Dense(32, activation='relu'),
-  Dense(16, activation='relu'),
   Dense(2, activation='sigmoid')
 ])
 
@@ -54,7 +53,7 @@ print("training...")
 train_history = model.fit(
   input_list,
   output_list,
-  epochs=1000,
+  epochs=100,
   verbose=1,
   validation_data=(
     validation_input_list,
