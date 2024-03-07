@@ -9,14 +9,6 @@ from tensorflow.keras.layers import Dense, Conv2D, MaxPooling2D, Flatten, Dropou
 
 import data
 
-gpus = tf.config.list_physical_devices('GPU')
-
-if gpus:
-  try:
-    tf.config.set_visible_devices(gpus[0], 'GPU')
-  except RuntimeError as e:
-    print(e)
-
 input_list = []
 output_list = []
 
