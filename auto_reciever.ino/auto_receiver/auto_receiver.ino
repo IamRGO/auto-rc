@@ -36,7 +36,7 @@ void loop() {
       String steering_str = input_data.substring(1, space_loc);
       String throttle_str = input_data.substring(space_loc + 1);
 
-      
+
       int auto_steer = steering_str.toInt();
       int auto_throttle = throttle_str.toInt();
 
@@ -46,5 +46,5 @@ void loop() {
       servo.write(auto_steer);
     }
   }
-  delay(20);
+  // delay(20);
 }
