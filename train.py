@@ -50,8 +50,8 @@ model = Sequential([
 ])
 
 model.compile(
-  optimizer=tf.keras.optimizers.legacy.RMSprop(learning_rate=0.01),
-  loss = 'mean_absolute_error',
+  optimizer=tf.keras.optimizers.legacy.Adadelta(learning_rate=0.01),
+  loss = 'mean_squared_error',
 )
 
 print("training...")
