@@ -8,23 +8,28 @@ import serial
 
 import tensorflow as tf
 from tensorflow.keras import Sequential
-from tensorflow.keras.layers import Dense, Conv2D, MaxPooling2D, Flatten
+from tensorflow.keras.layers import Dense, Dropout
 
 import data
 
 print("Staring camera...")
 
 camera = cv2.VideoCapture(-1)
-camera.set(cv2.CAP_PROP_FRAME_WIDTH, 128)
-camera.set(cv2.CAP_PROP_FRAME_HEIGHT, 96)
+camera.set(cv2.CAP_PROP_FRAME_WIDTH, 320)
+camera.set(cv2.CAP_PROP_FRAME_HEIGHT, 240)
 camera.set(cv2.CAP_PROP_FPS, 30)
 
 
 print("loading model...")
 model = Sequential([
-  Dense(128, activation='relu', input_dim=128 * 96),
-  Dense(64, activation='relu'),
-  Dense(32, activation='relu'),
+  Dense(784, activation='relu', input_dim=320 * 240),
+  Dropout(0.2),
+  Dense(439, activation='relu'),
+  Dropout(0.2),
+  Dense(242, activation='relu'),
+  Dropout(0.2),
+  Dense(42, activation='relu'),
+  Dropout(0.2),
   Dense(2, activation='sigmoid')
 ])
 
@@ -37,7 +42,7 @@ input("press enter to begin driving...")
 while True:
   print("taking a picture...")
   _, frame = camera.read()  # read the camera frame
-  image = cv2.resize(frame, (128, 96))
+  image = cv2.resize(frame, (320, 240))
   hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
 
   light_yellow = np.array([20, 35, 100])

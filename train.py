@@ -5,7 +5,7 @@ from os.path import isfile, join
 
 import tensorflow as tf
 from tensorflow.keras import Sequential
-from tensorflow.keras.layers import Dense, Conv2D, MaxPooling2D, Flatten
+from tensorflow.keras.layers import Dense, Conv2D, MaxPooling2D, Flatten, Dropout
 
 import data
 
@@ -32,15 +32,18 @@ for i in range(522):
     data.read_input('processed_temp/frame_' + i + '.png')
   )
 
-input_list = np.array(input_list[20:], dtype=np.float32)
-output_list = np.array(output_list[20:], dtype=np.float32)
-validation_input_list = np.array(input_list[:20], dtype=np.float32)
-validation_output_list = np.array(output_list[:20], dtype=np.float32)
+input_list = np.array(input_list, dtype=np.float32)
+output_list = np.array(output_list, dtype=np.float32)
 
 model = Sequential([
-  Dense(128, activation='relu', input_dim=len(input_list[0])),
-  Dense(64, activation='relu'),
-  Dense(32, activation='relu'),
+  Dense(784, activation='relu', input_dim=len(input_list[0])),
+  Dropout(0.2),
+  Dense(439, activation='relu'),
+  Dropout(0.2),
+  Dense(242, activation='relu'),
+  Dropout(0.2),
+  Dense(42, activation='relu'),
+  Dropout(0.2),
   Dense(2, activation='sigmoid')
 ])
 
@@ -53,12 +56,9 @@ print("training...")
 train_history = model.fit(
   input_list,
   output_list,
-  epochs=100,
+  epochs=200,
   verbose=1,
-  validation_data=(
-    validation_input_list,
-    validation_output_list
-  )
+  # validation_split=0.1,
 )
 
 model.save_weights("brain")

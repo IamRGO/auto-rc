@@ -16,7 +16,7 @@ def read_output(file_path):
 
 def read_input(file_path):
   image = cv2.imread(file_path)
-  small_image = cv2.resize(image, (128, 96))
+  small_image = cv2.resize(image, (320, 240))
   return parse_image(small_image)
 
 def parse_image(image):
