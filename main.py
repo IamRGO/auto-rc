@@ -19,10 +19,6 @@ for file in list_of_files:
     mask = cv2.inRange(hsv, light_yellow, dark_yellow)
     result = cv2.bitwise_and(image, image, mask = mask)
 
-    large = cv2.resize(result, (0,0), fx=5, fy=5)
-
-    # cv2.imwrite('processed/result_' + file, large)
-
     cv2.imwrite('processed_temp/' + file, result)
 
     print('temp/result_' + file)

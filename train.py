@@ -36,7 +36,7 @@ input_list = np.array(input_list, dtype=np.float32)
 output_list = np.array(output_list, dtype=np.float32)
 
 model = Sequential([
-  Dense(512, activation='relu', input_dim=len(input_list[0])),
+  Dense(376, activation='relu', input_dim=len(input_list[0])),
   Dropout(0.2),
   Dense(242, activation='relu'),
   Dropout(0.2),
@@ -54,7 +54,7 @@ print("training...")
 train_history = model.fit(
   input_list,
   output_list,
-  epochs=200,
+  epochs=50,
   verbose=1,
   # validation_split=0.1,
 )

@@ -29,4 +29,3 @@ while True:
 
     print("data collected", count)
     count += 1
-

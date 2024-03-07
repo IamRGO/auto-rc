@@ -74,12 +74,14 @@ void loop() {
       analogWrite(motor_a, 0);
     }
 
+    // fix this
     if (throttle_val == 0) {
       send_info.give(steering_val, -reverse_throttle_val);
     }
     else if (reverse_throttle_val == 0) {
       send_info.give(steering_val, throttle_val);
     }
+
     else {
       send_info.give(steering_val, 0);
     }
