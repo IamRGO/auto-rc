@@ -71,5 +71,3 @@ while True:
 
   message = "D" + str(steering_val) + " " + str(throttle_val)
   arduino.write(message.encode("UTF-8"))
-
-  time.sleep(0.1)

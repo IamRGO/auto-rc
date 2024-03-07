@@ -5,4 +5,6 @@ rm -rf temp
 unzip -o ~/auto-rc/temp.zip -d ~/auto-rc/
 rm -rf ~/auto-rc/temp.zip
 
-# bin/download 
+# bin/download
+
+pi@192.168.2.38
