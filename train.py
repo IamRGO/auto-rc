@@ -1,7 +1,7 @@
 import cv2
 import numpy as np
-from os import listdir
-from os.path import isfile, join
+import os
+import glob
 
 import tensorflow as tf
 from tensorflow.keras import Sequential
@@ -9,17 +9,33 @@ from tensorflow.keras.layers import Dense, Conv2D, MaxPooling2D, Flatten, Dropou
 
 import data
 
+gpus = tf.config.list_physical_devices('GPU')
+
+if gpus:
+  try:
+    tf.config.set_visible_devices(gpus[0], 'GPU')
+  except RuntimeError as e:
+    print(e)
+
 input_list = []
 output_list = []
 
 print("Loading images...")
 
-for i in range(532):
-  i = str(i)
+file_list = glob.glob("processed_temp/*png")
+file_index = 0
+for image_path in file_list:
+  i = image_path[len("processed_temp/frame_"):-4]
+  file_index += 1
 
-  print("loading...", i)
+  print("loading...", i, "(", file_index, "/", len(file_list), ")")
 
-  output_data = data.read_output("processed_temp/data_" + i + ".txt")
+  data_path = "processed_temp/data_" + i + ".txt"
+
+  if os.path.isfile(data_path) == False:
+    continue
+
+  output_data = data.read_output(data_path)
 
   if output_data == None:
     continue
@@ -29,7 +45,7 @@ for i in range(532):
   output_list.append(output_data)
 
   input_list.append(
-    data.read_input('processed_temp/frame_' + i + '.png')
+    data.read_input(image_path)
   )
 
 input_list = np.array(input_list, dtype=np.float32)
