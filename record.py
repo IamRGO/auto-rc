@@ -11,7 +11,7 @@ arduino = serial.Serial(port='/dev/ttyUSB0', baudrate=9600, timeout=5)
 time.sleep(2)
 print("Sending data...")
 
-count = 1571
+count = int(input("where do you want to start?"))
 
 while True:
     _, frame = camera.read()  # read the camera frame
