@@ -4,9 +4,7 @@ import os
 import glob
 
 import tensorflow as tf
-from tensorflow.keras import Sequential
-from tensorflow.keras.layers import Dense, Conv2D, MaxPooling2D, Flatten, Dropout
-
+import model as m
 import data
 
 gpus = tf.config.list_physical_devices('GPU')
@@ -51,24 +49,7 @@ for image_path in file_list:
 input_list = np.array(input_list, dtype=np.float32)
 output_list = np.array(output_list, dtype=np.float32)
 
-model = Sequential([
-  Conv2D(16, 3, padding='same', activation='relu', input_shape=(320, 240, 1)),
-  MaxPooling2D(),
-  Conv2D(32, 3, padding='same', activation='relu'),
-  MaxPooling2D(),
-  Conv2D(64, 3, padding='same', activation='relu'),
-  MaxPooling2D(),
-  Flatten(),
-  Dense(128, activation='relu'),
-  Dropout(0.2),
-  Dense(64, activation='relu'),
-  Dropout(0.2),
-  Dense(32, activation='relu'),
-  Dropout(0.2),
-  Dense(16, activation='relu'),
-  Dropout(0.2),
-  Dense(2, activation='sigmoid')
-])
+model = m.create_model()
 
 model.compile(
   optimizer=tf.keras.optimizers.legacy.Adadelta(learning_rate=0.01),
