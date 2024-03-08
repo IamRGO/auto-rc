@@ -52,15 +52,20 @@ input_list = np.array(input_list, dtype=np.float32)
 output_list = np.array(output_list, dtype=np.float32)
 
 model = Sequential([
-  Dense(327, activation='relu', input_dim=len(input_list[0])),
+  Conv2D(16, 3, padding='same', activation='relu', input_shape=(320, 240, 1)),
+  MaxPooling2D(),
+  Conv2D(32, 3, padding='same', activation='relu'),
+  MaxPooling2D(),
+  Conv2D(64, 3, padding='same', activation='relu'),
+  MaxPooling2D(),
+  Flatten(),
+  Dense(128, activation='relu'),
   Dropout(0.2),
-  Dense(242, activation='relu'),
+  Dense(64, activation='relu'),
   Dropout(0.2),
-  Dense(121, activation='relu'),
+  Dense(32, activation='relu'),
   Dropout(0.2),
-  Dense(50, activation='relu'),
-  Dropout(0.2),
-  Dense(25, activation='relu'),
+  Dense(16, activation='relu'),
   Dropout(0.2),
   Dense(2, activation='sigmoid')
 ])
@@ -74,7 +79,7 @@ print("training...")
 train_history = model.fit(
   input_list,
   output_list,
-  epochs=50,
+  epochs=300,
   verbose=1,
   # validation_split=0.1,
 )

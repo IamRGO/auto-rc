@@ -1,3 +1,4 @@
+import tensorflow as tf
 import cv2
 import numpy as np
 
@@ -22,13 +23,8 @@ def read_input(file_path):
 
 def parse_image(image):
   hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
-  input_data = []
+  img_tensor = tf.convert_to_tensor(hsv, dtype=tf.float32)
+  img_gray = tf.image.rgb_to_grayscale(img_tensor)
+  img_resized = tf.image.resize_with_pad(img_gray, 320, 240)
+  return img_resized
 
-  for row in hsv:
-    for pixel in row:
-      if pixel.tolist() == [0, 0, 0]:
-        input_data.append(0)
-      else:
-        input_data.append(1)
-
-  return input_data
