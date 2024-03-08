@@ -7,9 +7,7 @@ from os.path import isfile, join
 import serial
 
 import tensorflow as tf
-from tensorflow.keras import Sequential
-from tensorflow.keras.layers import Dense, Dropout, MaxPooling2D, Conv2D, Flatten
-
+import model as m
 import data
 
 print("Staring camera...")
@@ -20,25 +18,7 @@ camera.set(cv2.CAP_PROP_FRAME_HEIGHT, 240)
 camera.set(cv2.CAP_PROP_FPS, 30)
 
 print("loading model...")
-model = Sequential([
-  Conv2D(16, 3, padding='same', activation='relu', input_shape=(320, 240, 1)),
-  MaxPooling2D(),
-  Conv2D(32, 3, padding='same', activation='relu'),
-  MaxPooling2D(),
-  Conv2D(64, 3, padding='same', activation='relu'),
-  MaxPooling2D(),
-  Flatten(),
-  Dense(128, activation='relu'),
-  Dropout(0.2),
-  Dense(64, activation='relu'),
-  Dropout(0.2),
-  Dense(32, activation='relu'),
-  Dropout(0.2),
-  Dense(16, activation='relu'),
-  Dropout(0.2),
-  Dense(2, activation='sigmoid')
-])
-
+model = m.create_model()
 model.load_weights("brain")
 
 # connects to arduino
@@ -73,7 +53,7 @@ while True:
   print(result)
 
   steering_val = np.interp(result[0], [0.0, 1.0], [40, 130])
-  throttle_val = np.interp(result[1], [0.0, 1.0], [90, 180])
+  throttle_val = np.interp(result[1], [0.0, 1.0], [90, 190])
 
   if result[1] == 0:
       throttle_val = 0
