@@ -22,7 +22,7 @@ model = m.create_model()
 model.load_weights("brain")
 
 # connects to arduino
-arduino = serial.Serial(port='/dev/ttyUSB0', baudrate=9600, timeout=5)
+arduino = serial.Serial(port='/dev/ttyUSB0', baudrate=19200, timeout=5)
 
 input("press enter to begin driving...")
 while True:
@@ -31,8 +31,8 @@ while True:
   image = cv2.resize(frame, (320, 240))
   hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
 
-  light_yellow = np.array([20, 35, 100])
-  dark_yellow = np.array([100, 200, 177])
+  light_yellow = np.array([20, 50, 140])
+  dark_yellow = np.array([100, 200, 250])
 
   mask = cv2.inRange(hsv, light_yellow, dark_yellow)
 
