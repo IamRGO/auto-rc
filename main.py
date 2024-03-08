@@ -6,15 +6,14 @@ import shutil
 
 list_of_files = [f for f in listdir('temp') if isfile(join('temp', f))]
 
+
 for file in list_of_files:
   if "png" in file:
     image = cv2.imread('temp/' + file)
     hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
 
-    # light_yellow = np.array([30, 3, 150])
-    # dark_yellow = np.array([72, 109, 167])
-    light_yellow = np.array([20, 35, 100])
-    dark_yellow = np.array([100, 200, 177])
+    light_yellow = np.array([20, 50, 140])
+    dark_yellow = np.array([100, 200, 250])
 
     mask = cv2.inRange(hsv, light_yellow, dark_yellow)
     result = cv2.bitwise_and(image, image, mask = mask)
