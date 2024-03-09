@@ -7,6 +7,8 @@ import tensorflow as tf
 import model as m
 import data
 
+import signal, os
+
 gpus = tf.config.list_physical_devices('GPU')
 
 if gpus:
@@ -66,6 +68,21 @@ output_list = np.array(output_list, dtype=np.float32)
 
 model = m.create_model()
 
+terminate_signal = False
+
+def handler(signum, frame):
+  global terminate_signal
+  print('Signal handler called with signal', signum)
+  terminate_signal = True
+
+signal.signal(signal.SIGINT, handler)
+
+class TerminateOnFlag(tf.keras.callbacks.Callback):
+  def on_batch_end(self, batch, logs=None):
+    global terminate_signal
+    if terminate_signal == True:
+      self.model.stop_training = True
+
 model.compile(
   optimizer=tf.keras.optimizers.legacy.Adadelta(learning_rate=0.01, decay=0.001),
   loss = 'mean_squared_error',
@@ -75,9 +92,13 @@ print("training...")
 train_history = model.fit(
   input_list,
   output_list,
-  epochs=50,
+  epochs=1000,
   verbose=1,
   validation_split=0.2,
+  callbacks=[TerminateOnFlag()]
 )
 
-model.save_weights("brain")
+save = input("Save model? (y/n): ")
+
+if save == "y":
+  model.save_weights("brain")
