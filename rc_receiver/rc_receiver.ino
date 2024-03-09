@@ -60,7 +60,7 @@ void loop() {
       if (data[1] < 300) {
         data[1] = 300;
       }
-      reverse_throttle_val = map(-1 * data[1], -480, -300, 90, 190);
+      reverse_throttle_val = map(-1 * data[1], -480, -300, 90, 250);
       analogWrite(motor_b, reverse_throttle_val);
       analogWrite(motor_a, 0);
     }

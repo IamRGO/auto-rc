@@ -16,7 +16,7 @@ count = int(input("where do you want to start?"))
 
 while True:
     _, frame = camera.read()  # read the camera frame
-    image_filename = f'temp/frame_{count}.png'
+    image_filename = f'/home/pi/usb/temp/frame_{count}.png'
 
     arduino.write(b"stats")
     steering = str(arduino.readline().decode("UTF-8").strip())
@@ -25,7 +25,7 @@ while True:
     if steering == "" or throttle == "":
         continue
 
-    data_filename = f'temp/data_{count}.txt'
+    data_filename = f'/home/pi/usb/temp/data_{count}.txt'
     file = open(data_filename, "w")
     file.write(steering + ":" + throttle)
     file.close()
