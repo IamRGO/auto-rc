@@ -18,6 +18,14 @@ if gpus:
 input_list = []
 output_list = []
 
+bucket_list = []
+
+for i in range (0, 105, 5):
+  r = range(i, i + 4)
+  bucket_list.append(
+    [r, 0]
+  )
+
 print("Loading images...")
 
 file_list = glob.glob("processed_temp/*png")
@@ -38,6 +46,14 @@ for image_path in file_list:
 
   if output_data == None:
     continue
+
+  steering = output_data[0] * 100
+  bucket_index = int(steering / 5)
+
+  if bucket_list[bucket_index][1] > 305:
+    continue
+
+  bucket_list[bucket_index][1] += 1
 
   output_list.append(output_data)
 

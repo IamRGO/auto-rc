@@ -52,18 +52,11 @@ void loop() {
       if (data[1] > 980) {
         data[1] = 980;
       }
-      throttle_val = map(data[1], 520, 980, 90, 190);
+      throttle_val = map(data[1], 520, 980, 90, 147);
       analogWrite(motor_a, throttle_val);
       analogWrite(motor_b, 0);
     }
-    else if (data[1] < 480) {
-      if (data[1] < 300) {
-        data[1] = 300;
-      }
-      reverse_throttle_val = map(-1 * data[1], -480, -300, 90, 250);
-      analogWrite(motor_b, reverse_throttle_val);
-      analogWrite(motor_a, 0);
-    }
+
     else {
       analogWrite(motor_b, 0);
       analogWrite(motor_a, 0);

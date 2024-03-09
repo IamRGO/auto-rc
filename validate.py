@@ -1,67 +1,42 @@
-print("loading libraries...")
-import cv2
-import numpy as np
-from os import listdir
-from os.path import isfile, join
-
-import tensorflow as tf
-from tensorflow.keras import Sequential
-from tensorflow.keras.layers import Dense, Dropout
-
+import glob
+import matplotlib.pyplot as plt
 import data
 
+bucket_list = []
 
-print("loading model...")
-model = Sequential([
-  Dense(327, activation='relu', input_dim=320 * 240),
-  Dropout(0.2),
-  Dense(242, activation='relu'),
-  Dropout(0.2),
-  Dense(121, activation='relu'),
-  Dropout(0.2),
-  Dense(50, activation='relu'),
-  Dropout(0.2),
-  Dense(25, activation='relu'),
-  Dropout(0.2),
-  Dense(2, activation='sigmoid')
-])
-
-model.load_weights("brain")
-
-while True:
-  print("taking a picture...")
-  frame_number = int(input("Which frame would you like to validate? "))
-
-  frame = cv2.imread("temp/frame_" + str(frame_number) + ".png")
-  image = cv2.resize(frame, (320, 240))
-  hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
-
-  light_yellow = np.array([20, 35, 100])
-  dark_yellow = np.array([100, 200, 177])
-
-  mask = cv2.inRange(hsv, light_yellow, dark_yellow)
-
-  result = cv2.bitwise_and(image, image, mask = mask)
-
-  input_list = [
-    data.parse_image(result)
-  ]
-
-  print("running a prediction...")
-  result = model.predict(
-    np.array(input_list, dtype=np.float32),
-    verbose=0,
+for i in range (0, 105, 5):
+  r = range(i, i + 4)
+  bucket_list.append(
+    [r, 0]
   )
 
-  result = result[0]
+file_list = glob.glob("processed_temp/*png")
+file_index = 0
+for image_path in file_list:
+  i = image_path[len("processed_temp/frame_"):-4]
+  file_index += 1
 
-  print(result)
+  data_path = "processed_temp/data_" + i + ".txt"
+  output_data = data.read_output(data_path)
+  steering = output_data[0] * 100
+  bucket_index = int(steering / 5)
 
-  steering_val = np.interp(result[0], [0.0, 1.0], [40, 130])
-  throttle_val = np.interp(result[1], [0.0, 1.0], [90, 190])
+  if bucket_list[bucket_index][1] > 305:
+    continue
 
-  if result[1] == 0:
-      throttle_val = 0
+  bucket_list[bucket_index][1] += 1
 
-  message = "D" + str(steering_val) + " " + str(throttle_val)
-  print("arduino message: ", message)
+chart_label_list = []
+chart_value_list = []
+for bucket in bucket_list:
+  chart_label_list.append(str(bucket[0]))
+  chart_value_list.append(bucket[1])
+
+print(bucket_list)
+
+fig = plt.figure()
+plt.bar(chart_label_list, chart_value_list, width = 0.4)
+plt.xlabel("steering")
+plt.ylabel("count")
+plt.title("Weeee")
+plt.show()

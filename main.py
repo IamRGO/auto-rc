@@ -6,7 +6,6 @@ import shutil
 
 list_of_files = [f for f in listdir('temp') if isfile(join('temp', f))]
 
-
 for file in list_of_files:
   if "png" in file:
     image = cv2.imread('temp/' + file)

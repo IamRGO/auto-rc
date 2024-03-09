@@ -1,2 +1,3 @@
 #!/bin/bash
+rm -rf processed_temp/*
 unzip -o processed_temp.zip -d .

@@ -3,4 +3,6 @@
 scp pi@192.168.2.38:/home/pi/auto-rc/temp.zip ~/auto-rc/temp.zip
 rm -rf temp
 unzip -o ~/auto-rc/temp.zip -d ~/auto-rc/
+mv home/pi/usb/temp temp
+rm -rf home
 rm -rf ~/auto-rc/temp.zip
