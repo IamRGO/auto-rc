@@ -1,2 +1,3 @@
 #!/bin/sh
+rm -rf temp.zip
 zip -r temp.zip /home/pi/usb/temp
