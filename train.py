@@ -26,7 +26,8 @@ for image_path in file_list:
   i = image_path[len("processed_temp/frame_"):-4]
   file_index += 1
 
-  print("loading...", i, "(", file_index, "/", len(file_list), ")")
+  if file_index % 100 == 0:
+    print("loading...", i, "(", file_index, "/", len(file_list), ")")
 
   data_path = "processed_temp/data_" + i + ".txt"
 
@@ -50,7 +51,7 @@ output_list = np.array(output_list, dtype=np.float32)
 model = m.create_model()
 
 model.compile(
-  optimizer=tf.keras.optimizers.legacy.Adadelta(learning_rate=0.01),
+  optimizer=tf.keras.optimizers.legacy.Adadelta(learning_rate=0.01, decay=0.001),
   loss = 'mean_squared_error',
 )
 
@@ -60,7 +61,7 @@ train_history = model.fit(
   output_list,
   epochs=50,
   verbose=1,
-  # validation_split=0.1,
+  validation_split=0.2,
 )
 
 model.save_weights("brain")
