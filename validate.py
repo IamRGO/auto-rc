@@ -21,18 +21,19 @@ for image_path in file_list:
   steering = output_data[0] * 100
   bucket_index = int(steering / 5)
 
-  if bucket_list[bucket_index][1] > 500:
+  if bucket_list[bucket_index][1] > 800:
     continue
 
   bucket_list[bucket_index][1] += 1
 
 chart_label_list = []
 chart_value_list = []
+
 for bucket in bucket_list:
   chart_label_list.append(str(bucket[0]))
   chart_value_list.append(bucket[1])
 
-print(bucket_list)
+print("Total data size:", sum(chart_value_list))
 
 fig = plt.figure()
 plt.bar(chart_label_list, chart_value_list, width = 0.4)
