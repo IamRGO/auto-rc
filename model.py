@@ -20,6 +20,6 @@ def create_model():
         Dense(64, activation='relu'),
         Dense(32, activation='relu'),
         Dense(16, activation='relu'),
-        Dense(1, activation='sigmoid')
+        Dense(2, activation='sigmoid')
     ])
     return model
