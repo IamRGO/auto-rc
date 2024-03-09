@@ -37,8 +37,6 @@ for image_path in file_list:
 
   if output_data == None:
     continue
-  elif output_data[1] < 0:
-    continue
 
   output_list.append(output_data)
 
