@@ -96,7 +96,6 @@ train_history = model.fit(
   epochs=1000,
   verbose=1,
   validation_split=0.1,
-  metrics="accuracy",
   callbacks=[TerminateOnFlag()]
 )
 
