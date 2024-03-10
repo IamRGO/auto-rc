@@ -84,7 +84,7 @@ class TerminateOnFlag(tf.keras.callbacks.Callback):
       self.model.stop_training = True
 
 model.compile(
-  optimizer=tf.keras.optimizers.legacy.AdaMax(learning_rate=0.01, decay=0.001),
+  optimizer=tf.keras.optimizers.legacy.Adamax(learning_rate=0.01, decay=0.001),
   loss = 'mean_squared_error',
   metrics = ['accuracy'],
 )
