@@ -25,6 +25,6 @@ def parse_image(image):
   hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
   img_tensor = tf.convert_to_tensor(hsv, dtype=tf.float32)
   img_gray = tf.image.rgb_to_grayscale(img_tensor)
-  img_resized = tf.image.resize_with_pad(img_gray, 320, 240)
+  img_resized = tf.image.resize_with_pad(img_gray, 160, 120)
   return img_resized
 
