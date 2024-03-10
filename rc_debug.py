@@ -86,6 +86,8 @@ while flag:
         verbose=0,
     )[0]
 
+    result = list(map(lambda x: round(x, 2), result))
+
     # print("tensorflow", result)
 
     if skip:
