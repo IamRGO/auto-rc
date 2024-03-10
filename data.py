@@ -25,11 +25,11 @@ def parse_image(image):
   rgb_image = mask_image(image)
   img_tensor = tf.convert_to_tensor(rgb_image, dtype=tf.float32)
   img_gray = tf.image.rgb_to_grayscale(img_tensor)
-  img_resized = tf.image.resize_with_pad(img_gray, 80, 60)
+  img_resized = tf.image.resize_with_pad(img_gray, 160, 120)
   return img_resized
 
 def mask_image(image):
-  image = cv2.resize(image, (80, 60))
+  image = cv2.resize(image, (160, 120))
 
   hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
   light_yellow = np.array([20, 50, 140])
