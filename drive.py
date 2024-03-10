@@ -29,14 +29,6 @@ while True:
   print("taking a picture...")
   _, frame = camera.read()  # read the camera frame
   image = cv2.resize(frame, (320, 240))
-  hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
-
-  light_yellow = np.array([20, 50, 140])
-  dark_yellow = np.array([100, 200, 250])
-
-  mask = cv2.inRange(hsv, light_yellow, dark_yellow)
-
-  result = cv2.bitwise_and(image, image, mask = mask)
 
   input_list = [
     data.parse_image(result)

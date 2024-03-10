@@ -5,3 +5,5 @@ processed_temp
 processed
 __pycache__/
 brain.*
+debug
+more_debug

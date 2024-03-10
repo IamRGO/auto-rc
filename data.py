@@ -22,10 +22,23 @@ def read_input(file_path):
   return parse_image(small_image)
 
 def parse_image(image):
-  image = cv2.resize(image, (80, 60))
-  hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
-  img_tensor = tf.convert_to_tensor(hsv, dtype=tf.float32)
+  rgb_image = mask_image(image)
+  img_tensor = tf.convert_to_tensor(rgb_image, dtype=tf.float32)
   img_gray = tf.image.rgb_to_grayscale(img_tensor)
-  img_resized = tf.image.resize_with_pad(img_gray, 40, 30)
+  img_resized = tf.image.resize_with_pad(img_gray, 80, 60)
   return img_resized
 
+def mask_image(image):
+  image = cv2.resize(image, (80, 60))
+
+  hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
+  light_yellow = np.array([20, 50, 140])
+  dark_yellow = np.array([100, 200, 250])
+
+  mask = cv2.inRange(hsv, light_yellow, dark_yellow)
+  result = cv2.bitwise_or(image, image, mask = mask)
+
+  result[mask == 255] = [255, 255, 255]
+  rgb_image = cv2.cvtColor(result, cv2.COLOR_HSV2RGB)
+
+  return rgb_image
