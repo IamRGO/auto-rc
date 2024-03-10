@@ -21,4 +21,4 @@ for file in list_of_files:
     result = data.mask_image(image)
     cv2.imwrite('processed_temp/' + file, result)
   else:
-    shutil.move('temp/' + file, 'processed_temp/' + file)
+    shutil.copy('temp/' + file, 'processed_temp/' + file)

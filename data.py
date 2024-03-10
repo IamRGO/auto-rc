@@ -11,10 +11,21 @@ def read_output(file_path):
   steering = int(steering) # range 40, 131
   steering = np.interp(steering, [40, 130], [-1.0, 1.0])
 
+  left_steering = 0
+  right_steering = 0
+  neutral_steering = 0
+
+  if int(steering * 100) in range (-20, 20):
+    neutral_steering = 1
+  elif steering > 0:
+    right_steering = steering
+  else:
+    left_steering = abs(steering)
+
   # throttle = int(throttle) # range 90, 180
   # throttle = np.interp(throttle, [90, 150], [0.0, 1.0])
 
-  return [steering]
+  return [left_steering, neutral_steering, right_steering]
 
 def read_input(file_path):
   image = cv2.imread(file_path)

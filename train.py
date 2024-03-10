@@ -84,7 +84,7 @@ class TerminateOnFlag(tf.keras.callbacks.Callback):
       self.model.stop_training = True
 
 model.compile(
-  optimizer=tf.keras.optimizers.legacy.Adadelta(learning_rate=0.01, decay=0.001),
+  optimizer=tf.keras.optimizers.legacy.AdaMax(learning_rate=0.01, decay=0.001),
   loss = 'mean_squared_error',
 )
 
@@ -95,6 +95,7 @@ train_history = model.fit(
   epochs=1000,
   verbose=1,
   validation_split=0.1,
+  metrics="accuracy",
   callbacks=[TerminateOnFlag()]
 )
 
