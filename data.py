@@ -22,9 +22,10 @@ def read_input(file_path):
   return parse_image(small_image)
 
 def parse_image(image):
+  image = cv2.resize(image, (80, 60))
   hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
   img_tensor = tf.convert_to_tensor(hsv, dtype=tf.float32)
   img_gray = tf.image.rgb_to_grayscale(img_tensor)
-  img_resized = tf.image.resize_with_pad(img_gray, 80, 60)
+  img_resized = tf.image.resize_with_pad(img_gray, 40, 30)
   return img_resized
 
