@@ -52,7 +52,7 @@ for image_path in file_list:
   steering = output_data[0] * 100
   bucket_index = int(steering / 5)
 
-  if bucket_list[bucket_index][1] > 500:
+  if bucket_list[bucket_index][1] > 300:
     continue
 
   bucket_list[bucket_index][1] += 1
@@ -94,7 +94,7 @@ train_history = model.fit(
   output_list,
   epochs=1000,
   verbose=1,
-  validation_split=0.2,
+  validation_split=0.1,
   callbacks=[TerminateOnFlag()]
 )
 

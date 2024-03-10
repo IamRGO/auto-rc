@@ -17,7 +17,7 @@ while True:
   frame = cv2.imread("debug/frame_" + frame_index + ".png")
 
   input_list = [
-    data.parse_image(result)
+    data.parse_image(frame)
   ]
 
   print("running a prediction...")

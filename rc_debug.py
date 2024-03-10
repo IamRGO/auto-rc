@@ -77,7 +77,7 @@ while flag:
 
     input_list = [
         data.parse_image(
-            cv2.imread(mask_path)
+            cv2.imread(image_path)
         )
     ]
 

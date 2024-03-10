@@ -15,7 +15,7 @@ def create_model():
         MaxPooling2D(),
 
         Flatten(),
-        Dense(2084, activation='relu'),
+        Dense(1084, activation='relu'),
         Dense(775, activation='relu'),
         Dense(150, activation='relu'),
         Dense(2, activation='sigmoid')
