@@ -62,7 +62,8 @@ while flag:
         while file_index >= 0 and file_index < 9999999:
             file_index += delta
             file_index = abs(file_index)
-            image_path = "temp/frame_" + str(file_index) + ".png"
+            # image_path = "temp/frame_" + str(file_index) + ".png"
+            image_path = "processed_temp/frame_" + str(file_index) + ".png"
             mask_path = "processed_temp/frame_" + str(file_index) + ".png"
             data_path = "processed_temp/data_" + str(file_index) + ".txt"
             if (os.path.isfile(image_path) == True) and (os.path.isfile(mask_path) == True) and (os.path.isfile(data_path) == True):
@@ -76,9 +77,7 @@ while flag:
     # print(file_index, "human", output_data)
 
     input_list = [
-        data.parse_image(
-            cv2.imread(image_path)
-        )
+        data.read_input(image_path)
     ]
 
     result = model.predict(
