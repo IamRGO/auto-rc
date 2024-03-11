@@ -21,6 +21,6 @@ def create_model():
         Dropout(0.1),
         Dense(50, activation='relu'),
         Dropout(0.1),
-        Dense(3, activation='sigmoid')
+        Dense(1, activation='tanh')
     ])
     return model
