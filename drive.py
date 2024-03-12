@@ -22,7 +22,7 @@ model = m.create_model()
 model.load_weights("brain")
 
 # connects to arduino
-arduino = serial.Serial(port='/dev/ttyUSB0', baudrate=19200, timeout=5)
+arduino = serial.Serial(port='/dev/ttyUSB0', baudrate=9600, timeout=5)
 
 input("press enter to begin driving...")
 while True:

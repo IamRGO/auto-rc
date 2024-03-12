@@ -7,8 +7,8 @@ camera.set(cv2.CAP_PROP_FRAME_WIDTH, 320)
 camera.set(cv2.CAP_PROP_FRAME_HEIGHT, 240)
 camera.set(cv2.CAP_PROP_FPS, 30)
 
-arduino = serial.Serial(port='/dev/ttyUSB0', baudrate=19200, timeout=5)
-# arduino = serial.Serial(port='/dev/cu.usbserial-1420', baudrate=19200, timeout=5)
+arduino = serial.Serial(port='/dev/ttyUSB0', baudrate=9600, timeout=5)
+# arduino = serial.Serial(port='/dev/cu.usbserial-1420', baudrate=9600, timeout=5)
 time.sleep(2)
 print("Sending data...")
 
