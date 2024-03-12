@@ -6,6 +6,7 @@ camera = cv2.VideoCapture(0)
 camera.set(cv2.CAP_PROP_FRAME_WIDTH, 320)
 camera.set(cv2.CAP_PROP_FRAME_HEIGHT, 240)
 camera.set(cv2.CAP_PROP_FPS, 30)
+camera.set(cv2.CV_CAP_PROP_BUFFERSIZE, 1)
 
 arduino = serial.Serial(port='/dev/ttyUSB0', baudrate=9600, timeout=5)
 # arduino = serial.Serial(port='/dev/cu.usbserial-1420', baudrate=9600, timeout=5)
@@ -15,7 +16,7 @@ print("Sending data...")
 count = int(input("where do you want to start?"))
 
 while True:
-    _, frame = camera.read()  # read the camera frame
+    _, frame = camera.grab()  # read the camera frame
     image_filename = f'/home/pi/usb/temp/frame_{count}.png'
 
     arduino.write(b"stats")

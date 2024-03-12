@@ -16,6 +16,7 @@ camera = cv2.VideoCapture(-1)
 camera.set(cv2.CAP_PROP_FRAME_WIDTH, 320)
 camera.set(cv2.CAP_PROP_FRAME_HEIGHT, 240)
 camera.set(cv2.CAP_PROP_FPS, 30)
+camera.set(cv2.CV_CAP_PROP_BUFFERSIZE, 1)
 
 print("loading model...")
 model = m.create_model()
@@ -27,7 +28,7 @@ arduino = serial.Serial(port='/dev/ttyUSB0', baudrate=9600, timeout=5)
 input("press enter to begin driving...")
 while True:
   print("taking a picture...")
-  _, frame = camera.read()  # read the camera frame
+  _, frame = camera.grab()  # read the camera frame
   image = cv2.resize(frame, (320, 240))
 
   input_list = [
