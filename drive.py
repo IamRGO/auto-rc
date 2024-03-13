@@ -16,7 +16,7 @@ camera = cv2.VideoCapture(-1)
 camera.set(cv2.CAP_PROP_FRAME_WIDTH, 320)
 camera.set(cv2.CAP_PROP_FRAME_HEIGHT, 240)
 camera.set(cv2.CAP_PROP_FPS, 30)
-camera.set(cv2.CV_CAP_PROP_BUFFERSIZE, 1)
+camera.set(cv2.CAP_PROP_BUFFERSIZE, 1)
 
 print("loading model...")
 model = m.create_model()

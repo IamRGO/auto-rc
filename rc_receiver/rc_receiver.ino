@@ -18,6 +18,7 @@ Servo servo;
 
 int motor_a = 3;
 int motor_b = 2;
+int throttle_val = 0;
 
 void setup() {
   radio.begin();
@@ -35,6 +36,12 @@ void setup() {
   analogWrite(motor_b, 0);
 }
 
+void kick_start() {
+  analogWrite(motor_a, 250);
+  analogWrite(motor_b, 0);
+  delay(500);
+}
+
 void loop() {
   radio.startListening();
 
@@ -45,24 +52,26 @@ void loop() {
     int steering_val = map(data[0], 3, 1003, 40, 130);
     servo.write(steering_val);
 
-    int throttle_val = 0;
     int reverse_throttle_val = 0;
 
     if (data[1] > 520) {
       if (data[1] > 980) {
         data[1] = 980;
       }
+
+      if (throttle_val == 0) {
+        kick_start();
+      }
+      
       throttle_val = map(data[1], 520, 980, 90, 147);
       analogWrite(motor_a, throttle_val);
       analogWrite(motor_b, 0);
-    }
-
-    else {
+    } else {
+      throttle_val = 0;
       analogWrite(motor_b, 0);
       analogWrite(motor_a, 0);
     }
 
-    // fix this
     if (throttle_val >= 90) {
       send_info.give(steering_val, throttle_val);
     }
