@@ -25,6 +25,7 @@ while True:
     frame = imutils.resize(rgb, width=320)
 
     image_filename = f'/home/pi/usb/temp/frame_{count}.png'
+    message = ""
 
     try:
         arduino.write(b"stats")
