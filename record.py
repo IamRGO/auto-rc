@@ -9,9 +9,10 @@ config = camera.create_preview_configuration(
     main={ "size": (int(3280/4), int(2464/4)) },
 )
 camera.configure(config)
+camera.set_controls({ "ExposureTime": 10000 })
 camera.start()
 
-arduino = serial.Serial(port='/dev/ttyUSB0', baudrate=9600, timeout=5)
+arduino = serial.Serial(port='/dev/ttyUSB0', baudrate=9600, timeout=0.3)
 
 time.sleep(2)
 print("Sending data...")
