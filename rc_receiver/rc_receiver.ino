@@ -31,13 +31,13 @@ void setup() {
   pinMode(motor_a, OUTPUT);
   pinMode(motor_b, OUTPUT);
 
-  Serial.begin(9600);
+  Serial.begin(19200);
   Serial.setTimeout(100);
   analogWrite(motor_b, 0);
 }
 
 void kick_start() {
-  analogWrite(motor_a, 250);
+  analogWrite(motor_a, 170);
   analogWrite(motor_b, 0);
   delay(500);
 }
@@ -63,7 +63,7 @@ void loop() {
         kick_start();
       }
       
-      throttle_val = map(data[1], 520, 980, 90, 147);
+      throttle_val = map(data[1], 520, 980, 90, 135);
       analogWrite(motor_a, throttle_val);
       analogWrite(motor_b, 0);
     } else {
@@ -77,5 +77,5 @@ void loop() {
     }
   }
 
-  delay(20);
+  delay(5);
 }
