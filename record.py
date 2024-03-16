@@ -28,8 +28,7 @@ while True:
 
     try:
         arduino.write(b"stats")
-        steering = str(arduino.readline().decode("UTF-8").strip())
-        throttle = str(arduino.readline().decode("UTF-8").strip())
+        steering, throttle = list(str(arduino.readline().decode("UTF-8").strip()).split(":"))
     except UnicodeDecodeError:
         print("Invalid data from arduino...")
         arduino.flush()
