@@ -31,8 +31,8 @@ void setup() {
   pinMode(motor_a, OUTPUT);
   pinMode(motor_b, OUTPUT);
 
-  Serial.begin(19200);
-  Serial.setTimeout(100);
+  Serial.begin(9600);
+  Serial.setTimeout(200);
   analogWrite(motor_b, 0);
 }
 
@@ -43,9 +43,7 @@ void kick_start() {
 }
 
 void loop() {
-  radio.startListening();
-
-  while (radio.available()) {
+  if (radio.available()) {
     int data[2];
     radio.read(&data, sizeof(data));
 
