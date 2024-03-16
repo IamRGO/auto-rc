@@ -42,6 +42,7 @@ config = camera.create_preview_configuration(
     main={ "size": (int(3280/4), int(2464/4)) },
 )
 camera.configure(config)
+camera.set_controls({ "ExposureTime": 10000 })
 camera.start()
 
 # Start the server
