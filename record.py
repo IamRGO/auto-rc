@@ -47,3 +47,4 @@ while True:
 
     print("data collected", count, "steering", steering, "throttle", throttle)
     count += 1
+    time.sleep(0.05)
