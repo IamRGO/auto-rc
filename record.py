@@ -28,13 +28,13 @@ while True:
 
     try:
         arduino.write(b"stats")
-        steering, throttle = list(str(arduino.readline().decode("UTF-8").strip()).split(":"))
+        message = str(arduino.readline().decode("UTF-8").strip())
+        if message == "" or (":" not in message):
+            continue
+        steering, throttle = message.split(":")
     except UnicodeDecodeError:
-        print("Invalid data from arduino...")
+        print("Invalid data from arduino...", message)
         arduino.flush()
-        continue
-
-    if steering == "" or throttle == "":
         continue
 
     data_filename = f'/home/pi/usb/temp/data_{count}.txt'

@@ -7,11 +7,11 @@ void Send::give(int steer, int throttle) {
     input_data.trim();
 
     if (input_data == "stats") {
-      Serial.println(steer);
+      Serial.print(steer);
+      Serial.print(":");
       Serial.println(throttle);
     } else {
       Serial.println("I don't understand");
-      Serial.println(input_data);
     }
   }
 }
