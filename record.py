@@ -1,15 +1,8 @@
 import cv2
 import serial
 import time
-
 import imutils
 from picamera2 import Picamera2
-
-#camera = cv2.VideoCapture(0)
-#camera.set(cv2.CAP_PROP_FRAME_WIDTH, 320)
-#camera.set(cv2.CAP_PROP_FRAME_HEIGHT, 240)
-#camera.set(cv2.CAP_PROP_FPS, 30)
-#camera.set(cv2.cap_prop_buffersize, 1)
 
 camera = Picamera2()
 config = camera.create_preview_configuration(
@@ -19,7 +12,6 @@ camera.configure(config)
 camera.start()
 
 arduino = serial.Serial(port='/dev/ttyUSB0', baudrate=9600, timeout=5)
-# arduino = serial.Serial(port='/dev/cu.usbserial-1420', baudrate=9600, timeout=5)
 
 time.sleep(2)
 print("Sending data...")
@@ -33,9 +25,14 @@ while True:
 
     image_filename = f'/home/pi/usb/temp/frame_{count}.png'
 
-    arduino.write(b"stats")
-    steering = str(arduino.readline().decode("UTF-8").strip())
-    throttle = str(arduino.readline().decode("UTF-8").strip())
+    try:
+        arduino.write(b"stats")
+        steering = str(arduino.readline().decode("UTF-8").strip())
+        throttle = str(arduino.readline().decode("UTF-8").strip())
+    except UnicodeDecodeError:
+        print("Invalid data from arduino...")
+        arduino.flush()
+        continue
 
     if steering == "" or throttle == "":
         continue
