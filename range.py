@@ -2,7 +2,7 @@ import cv2
 import numpy as np
 import pdb
 
-image = cv2.imread('rope_sample.png')
+image = cv2.imread('rope_sample__.png')
 
 hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
 

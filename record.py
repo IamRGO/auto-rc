@@ -12,7 +12,7 @@ camera.configure(config)
 camera.set_controls({ "ExposureTime": 8000 })
 camera.start()
 
-arduino = serial.Serial(port='/dev/ttyUSB0', baudrate=4800, timeout=1)
+arduino = serial.Serial(port='/dev/ttyUSB0', baudrate=2400, timeout=1)
 
 time.sleep(2)
 print("Sending data...")

@@ -31,7 +31,7 @@ void setup() {
   pinMode(motor_a, OUTPUT);
   pinMode(motor_b, OUTPUT);
 
-  Serial.begin(4800);
+  Serial.begin(2400);
   Serial.setTimeout(250);
   analogWrite(motor_b, 0);
 }

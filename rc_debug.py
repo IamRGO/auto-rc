@@ -62,8 +62,7 @@ while flag:
         while file_index >= 0 and file_index < 9999999:
             file_index += delta
             file_index = abs(file_index)
-            # image_path = "temp/frame_" + str(file_index) + ".png"
-            image_path = "processed_temp/frame_" + str(file_index) + ".png"
+            image_path = "temp/frame_" + str(file_index) + ".png"
             mask_path = "processed_temp/frame_" + str(file_index) + ".png"
             data_path = "processed_temp/data_" + str(file_index) + ".txt"
             if (os.path.isfile(image_path) == True) and (os.path.isfile(mask_path) == True) and (os.path.isfile(data_path) == True):
@@ -72,6 +71,9 @@ while flag:
 
     image = pygame.image.load(image_path)
     mask = pygame.image.load(mask_path)
+
+    image = pygame.transform.scale_by(image, 3)
+    mask = pygame.transform.scale_by(mask, 2)
 
     output_data = data.read_output(data_path)
     # print(file_index, "human", output_data)
