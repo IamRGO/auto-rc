@@ -11,16 +11,14 @@ def create_model():
         MaxPooling2D(),
         Conv2D(64, 3, padding='same', activation='relu'),
         MaxPooling2D(),
-        Conv2D(64, 3, padding='same', activation='relu'),
-        MaxPooling2D(),
 
         Flatten(),
         Dense(326, activation='relu'),
         Dropout(0.1),
         Dense(100, activation='relu'),
         Dropout(0.1),
-        Dense(50, activation='sigmoid'),
+        Dense(50, activation='relu'),
         Dropout(0.1),
-        Dense(1)
+        Dense(1, activation='sigmoid')
     ])
     return model
