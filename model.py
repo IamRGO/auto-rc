@@ -14,11 +14,13 @@ def create_model():
 
         Flatten(),
         Dense(64, activation='relu'),
-        Dropout(0.2),
+        Dropout(0.1),
+        Dense(64, activation='relu'),
+        Dropout(0.1),
         Dense(32, activation='relu'),
-        Dropout(0.2),
-        Dense(16, activation='relu'),
-        Dropout(0.2),
+        Dropout(0.1),
+        Dense(32, activation='relu'),
+        Dropout(0.1),
         Dense(1, activation='sigmoid')
     ])
     return model

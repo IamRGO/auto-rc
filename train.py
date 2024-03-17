@@ -21,8 +21,9 @@ input_list = []
 output_list = []
 
 bucket_list = []
+bucket_size = 10
 
-for i in range (0, 105, 5):
+for i in range (0, 105, bucket_size):
   r = range(i, i + 4)
   bucket_list.append(
     [r, 0]
@@ -50,9 +51,9 @@ for image_path in file_list:
     continue
 
   steering = output_data[0] * 100
-  bucket_index = int(steering / 5)
+  bucket_index = int(steering / bucket_size)
 
-  if bucket_list[bucket_index][1] > 500:
+  if bucket_list[bucket_index][1] > 200:
     continue
 
   bucket_list[bucket_index][1] += 1
