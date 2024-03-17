@@ -19,16 +19,17 @@ def read_output(file_path):
 def read_input(file_path):
   image = cv2.imread(file_path)
   img_tensor = tf.convert_to_tensor(image, dtype=tf.float32)
-  img_gray = tf.image.rgb_to_grayscale(img_tensor)
-  img_resized = tf.image.resize_with_pad(img_gray, 160, 120)
-  return img_resized
+  # img_gray = tf.image.rgb_to_grayscale(img_tensor)
+  # img_resized = tf.image.resize_with_pad(img_gray, 160, 120)
+  return img_tensor
 
 def parse_image(image):
   rgb_image = mask_image(image)
   img_tensor = tf.convert_to_tensor(rgb_image, dtype=tf.float32)
-  img_gray = tf.image.rgb_to_grayscale(img_tensor)
-  img_resized = tf.image.resize_with_pad(img_gray, 160, 120)
-  return img_resized
+  # img_gray = tf.image.rgb_to_grayscale(img_tensor)
+  # img_resized = tf.image.resize_with_pad(img_gray, 160, 120)
+  # return img_resized
+  return img_tensor
 
 def mask_image(image):
   image = cv2.resize(image, (160, 120))
@@ -38,10 +39,6 @@ def mask_image(image):
   dark_ya = np.array([35, 310, 150])
 
   mask = cv2.inRange(hsv, light_ya, dark_ya)
+  result = cv2.bitwise_and(image, image, mask = mask)
 
-  result = cv2.bitwise_or(image, image, mask = mask)
-
-  # result[mask == 255] = [255, 255, 255]
-  rgb_image = cv2.cvtColor(result, cv2.COLOR_HSV2RGB)
-
-  return rgb_image
+  return result
