@@ -28,7 +28,7 @@ while True:
     message = ""
 
     try:
-        arduino.write(b"s")
+        arduino.write(b"s\n")
         message = str(arduino.readline().decode("UTF-8").strip())
         arduino.reset_input_buffer()
 
@@ -52,4 +52,3 @@ while True:
 
     print("data collected", count, "steering", steering, "throttle", throttle)
     count += 1
-    time.sleep(0.05)

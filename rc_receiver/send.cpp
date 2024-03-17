@@ -3,7 +3,8 @@
 
 void Send::give(int steer, int throttle) {
   if (Serial.available()) {
-    String input_data = Serial.readString();
+    String input_data = Serial.readStringUntil('\n');
+    Serial.flush();
     input_data.trim();
 
     if (input_data == "s") {
