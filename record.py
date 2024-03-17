@@ -38,6 +38,9 @@ while True:
         arduino.flush()
         continue
 
+    if throttle < 90:
+        continue
+
     data_filename = f'/home/pi/usb/temp/data_{count}.txt'
     file = open(data_filename, "w")
     file.write(steering + ":" + throttle)
