@@ -52,7 +52,7 @@ for image_path in file_list:
   steering = output_data[0] * 100
   bucket_index = int(steering / 5)
 
-  if bucket_list[bucket_index][1] > 300:
+  if bucket_list[bucket_index][1] > 500:
     continue
 
   bucket_list[bucket_index][1] += 1
