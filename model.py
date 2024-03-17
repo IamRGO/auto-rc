@@ -3,7 +3,7 @@ from tensorflow.keras.layers import Dense, Dropout, MaxPooling2D, Conv2D, Flatte
 
 def create_model():
     model = Sequential([
-        Conv2D(16, 3, padding='same', activation='relu', input_shape=(120, 160, 3)),
+        Conv2D(16, 3, padding='same', activation='relu', input_shape=(160, 120, 3)),
         MaxPooling2D(),
         Conv2D(32, 3, padding='same', activation='relu'),
         MaxPooling2D(),
