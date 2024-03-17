@@ -14,7 +14,7 @@ def read_output(file_path):
   throttle = int(throttle)
   throttle = np.interp(throttle, [90, 135], [0.0, 1.0])
 
-  return [steering]
+  return [steering, throttle]
 
 def read_input(file_path):
   image = cv2.imread(file_path)
