@@ -34,8 +34,8 @@ def mask_image(image):
   image = cv2.resize(image, (160, 120))
 
   hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
-  light_ya = np.array([28, 38, 100])
-  dark_ya = np.array([40, 200, 274])
+  light_ya = np.array([17, 100, 44])
+  dark_ya = np.array([35, 310, 150])
 
   mask = cv2.inRange(hsv, light_ya, dark_ya)
 
