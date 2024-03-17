@@ -19,16 +19,13 @@ def read_output(file_path):
 def read_input(file_path):
   image = cv2.imread(file_path)
   img_tensor = tf.convert_to_tensor(image, dtype=tf.float32)
-  # img_gray = tf.image.rgb_to_grayscale(img_tensor)
-  # img_resized = tf.image.resize_with_pad(img_gray, 160, 120)
+  img_resized = tf.image.resize_with_pad(img_tensor, 120, 160)
   return img_tensor
 
 def parse_image(image):
   rgb_image = mask_image(image)
   img_tensor = tf.convert_to_tensor(rgb_image, dtype=tf.float32)
-  # img_gray = tf.image.rgb_to_grayscale(img_tensor)
-  # img_resized = tf.image.resize_with_pad(img_gray, 160, 120)
-  # return img_resized
+  img_resized = tf.image.resize_with_pad(img_tensor, 120, 160)
   return img_tensor
 
 def mask_image(image):
