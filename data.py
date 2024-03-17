@@ -41,7 +41,7 @@ def mask_image(image):
 
   result = cv2.bitwise_or(image, image, mask = mask)
 
-  result[mask == 255] = [255, 255, 255]
+  # result[mask == 255] = [255, 255, 255]
   rgb_image = cv2.cvtColor(result, cv2.COLOR_HSV2RGB)
 
   return rgb_image
