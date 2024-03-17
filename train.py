@@ -53,7 +53,7 @@ for image_path in file_list:
   steering = output_data[0] * 100
   bucket_index = int(steering / bucket_size)
 
-  if bucket_list[bucket_index][1] > 200:
+  if bucket_list[bucket_index][1] > 500:
     continue
 
   bucket_list[bucket_index][1] += 1
@@ -80,9 +80,18 @@ signal.signal(signal.SIGINT, handler)
 
 class TerminateOnFlag(tf.keras.callbacks.Callback):
   def on_batch_end(self, batch, logs=None):
-    global terminate_signal
+    global terminate_signal, model, input_list
     if terminate_signal == True:
       self.model.stop_training = True
+
+    test_input_list = [
+      input_list[0],
+      input_list[12],
+    ]
+
+    result = model.predict(np.array(test_input_list, dtype=np.float32))
+    print("result", list(map(lambda x: round(x[0], 2), result)))
+
 
 model.compile(
   optimizer=tf.keras.optimizers.legacy.Adadelta(learning_rate=0.01, decay=0.001),

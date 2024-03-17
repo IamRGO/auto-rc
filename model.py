@@ -17,10 +17,10 @@ def create_model():
         Flatten(),
         Dense(1164, activation='relu'),
         Dropout(0.1),
-        Dense(100, activation='relu'),
+        Dense(512, activation='relu'),
         Dropout(0.1),
-        Dense(50, activation='relu'),
+        Dense(240, activation='relu'),
         Dropout(0.1),
-        Dense(3, activation='sigmoid')
+        Dense(1, activation='sigmoid')
     ])
     return model
