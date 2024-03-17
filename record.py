@@ -28,8 +28,10 @@ while True:
     message = ""
 
     try:
-        arduino.write(b"stats")
+        arduino.write(b"s")
         message = str(arduino.readline().decode("UTF-8").strip())
+        arduino.reset_input_buffer()
+
         if message == "" or (":" not in message):
             continue
         steering, throttle = message.split(":")

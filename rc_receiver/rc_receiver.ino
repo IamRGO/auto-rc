@@ -32,7 +32,7 @@ void setup() {
   pinMode(motor_b, OUTPUT);
 
   Serial.begin(9600);
-  Serial.setTimeout(200);
+  Serial.setTimeout(300);
   analogWrite(motor_b, 0);
 }
 
@@ -70,9 +70,7 @@ void loop() {
       analogWrite(motor_a, 0);
     }
 
-    if (throttle_val >= 90) {
-      send_info.give(steering_val, throttle_val);
-    }
+    send_info.give(steering_val, throttle_val);
   }
 
   delay(5);

@@ -6,12 +6,12 @@ void Send::give(int steer, int throttle) {
     String input_data = Serial.readString();
     input_data.trim();
 
-    if (input_data == "stats") {
+    if (input_data == "s") {
       Serial.print(steer);
       Serial.print(":");
       Serial.println(throttle);
     } else {
-      Serial.println("I don't understand");
+      Serial.println("N");
     }
   }
 }
