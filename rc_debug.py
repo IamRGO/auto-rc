@@ -39,35 +39,35 @@ while flag:
             flag = False
             break
 
-        # if event.type == pygame.KEYDOWN:
-        #     if event.key == pygame.K_LEFT:
-        #         last_key = "Left"
-        #     elif event.key == pygame.K_RIGHT:
-        #         last_key = "Right"
-        #     elif event.key == pygame.K_d:
-        #         print("image", file_index, "deleting...")
-        #         if (os.path.isfile(image_path) == True) and (os.path.isfile(mask_path) == True) and (os.path.isfile(data_path) == True):
-        #             r_image_path = image_path
-        #             r_mask_path = mask_path
-        #             r_data_path = data_path
-        #             skip = True
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_LEFT:
+                last_key = "Left"
+            elif event.key == pygame.K_RIGHT:
+                last_key = "Right"
+            elif event.key == pygame.K_d:
+                print("image", file_index, "deleting...")
+                if (os.path.isfile(image_path) == True) and (os.path.isfile(mask_path) == True) and (os.path.isfile(data_path) == True):
+                    r_image_path = image_path
+                    r_mask_path = mask_path
+                    r_data_path = data_path
+                    skip = True
 
-        #         image_path = None
+                image_path = None
 
-    keys = pygame.key.get_pressed()
-    if keys[pygame.K_LEFT]:
-        last_key = "Left"
-    elif keys[pygame.K_RIGHT]:
-        last_key = "Right"
-    elif keys[pygame.K_d]:
-        print("image", file_index, "deleting...")
-        if (os.path.isfile(image_path) == True) and (os.path.isfile(mask_path) == True) and (os.path.isfile(data_path) == True):
-            r_image_path = image_path
-            r_mask_path = mask_path
-            r_data_path = data_path
-            skip = True
+    # keys = pygame.key.get_pressed()
+    # if keys[pygame.K_LEFT]:
+    #     last_key = "Left"
+    # elif keys[pygame.K_RIGHT]:
+    #     last_key = "Right"
+    # elif keys[pygame.K_d]:
+    #     print("image", file_index, "deleting...")
+    #     if (os.path.isfile(image_path) == True) and (os.path.isfile(mask_path) == True) and (os.path.isfile(data_path) == True):
+    #         r_image_path = image_path
+    #         r_mask_path = mask_path
+    #         r_data_path = data_path
+    #         skip = True
 
-        image_path = None
+    #     image_path = None
 
 
     if (last_key in ["Left", "Right"]) or image_path == None:
