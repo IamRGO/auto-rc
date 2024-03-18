@@ -30,8 +30,12 @@ model.load_weights("brain")
 arduino = serial.Serial(port='/dev/ttyUSB0', baudrate=2400, timeout=1)
 
 input("press enter to begin driving...")
+last_fps = 0
+last_fps_time = time.time()
+fps = 0
+
 while True:
-  print("taking a picture...")
+  print("taking a picture...", time.now())
   image = camera.capture_array()
   image = imutils.resize(image, width=160)
 
@@ -39,7 +43,7 @@ while True:
     data.parse_image(image)
   ]
 
-  print("running a prediction...")
+  print("running a prediction...", fps)
   result = model.predict(
     np.array(input_list, dtype=np.float32),
     verbose=0,
@@ -49,7 +53,13 @@ while True:
   print(result)
 
   steering_val = np.interp(result[0], [0, 1.0], [40, 130])
-  throttle_val = 130
+  throttle_val = 0
 
   message = "D" + str(steering_val) + " " + str(throttle_val)
   arduino.write(message.encode("UTF-8"))
+  fps += 1
+
+  if time.time() - last_fps_time > 1:
+    last_fps = fps
+    last_fps_time = time.time()
+    fps = 0
