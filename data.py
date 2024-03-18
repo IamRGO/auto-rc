@@ -2,8 +2,8 @@ import tensorflow as tf
 import cv2
 import numpy as np
 
-IMAGE_WIDTH = 80
-IMAGE_HEIGHT = 60
+IMAGE_WIDTH = 160
+IMAGE_HEIGHT = 120
 
 def read_output(file_path):
   file = open(file_path, 'r')
