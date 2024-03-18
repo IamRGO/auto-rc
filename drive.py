@@ -59,6 +59,8 @@ while True:
   arduino.write(message.encode("UTF-8"))
   fps += 1
 
+  time.sleep(0.05)
+
   if time.time() - last_fps_time > 1:
     last_fps = fps
     last_fps_time = time.time()
