@@ -42,9 +42,8 @@ while True:
     data.parse_image(image)
   ]
 
-  result = model.predict(
+  result = model(
     np.array(input_list, dtype=np.float32),
-    verbose=0,
   )
 
   duration_ms = int((time.time() - last_capture_time) * 1000)
