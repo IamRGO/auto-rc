@@ -17,12 +17,11 @@ def create_model():
 
         Flatten(),
         # before was 1164, 512, 240
-        Dense(128, activation='relu'),
-        Dropout(0.1),
-        Dense(64, activation='relu'),
-        Dropout(0.1),
         Dense(32, activation='relu'),
-
+        Dropout(0.1),
+        Dense(16, activation='relu'),
+        Dropout(0.1),
+        Dense(16, activation='relu'),
         Dropout(0.1),
         Dense(1, activation='sigmoid')
     ])
