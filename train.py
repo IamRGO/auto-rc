@@ -1,7 +1,8 @@
-import cv2
 import numpy as np
+import matplotlib.pyplot as plt
 import os
 import glob
+import copy
 
 import tensorflow as tf
 import model as m
@@ -67,6 +68,7 @@ for image_path in file_list:
 input_list = np.array(input_list, dtype=np.float32)
 output_list = np.array(output_list, dtype=np.float32)
 model = m.create_model()
+plt.ion()
 
 terminate_signal = False
 
@@ -83,8 +85,26 @@ class TerminateOnFlag(tf.keras.callbacks.Callback):
     if terminate_signal == True:
       self.model.stop_training = True
 
+  def on_epoch_end(self, epoch, logs=None):
+    # if we are on Mac or have DISPLAY env variable set
+    if os.name != "posix" or ("DISPLAY" not in os.environ):
+      return
+
+    test_input_list = input_list[:200]
+    result = model.predict(test_input_list)
+    result = np.ndarray.flatten(result)
+
+    x = np.array(list(range(0, 200)))
+    y = np.array(output_list[:200])
+
+    plt.clf()
+    plt.scatter(x, y, s=[10] * 200)
+    plt.scatter(x, result, s=[10] * 200)
+    plt.show()
+    plt.pause(0.1)
+
 model.compile(
-  optimizer=tf.keras.optimizers.legacy.Adadelta(learning_rate=0.01, decay=0.001),
+  optimizer=tf.keras.optimizers.legacy.Adadelta(learning_rate=0.1),
   loss = 'mean_squared_error',
 )
 

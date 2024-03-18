@@ -12,7 +12,7 @@ def read_output(file_path):
   steering = np.interp(steering, [40, 130], [0.0, 1.0])
 
   # throttle = int(throttle)
-  # throttle = np.interp(throttle, [90, 135], [0.0, 1.0])
+  # throttle = np.interp(throttle, [90, 130], [0.0, 1.0])
 
   return [steering]
 
