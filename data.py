@@ -24,16 +24,20 @@ def read_input(file_path):
   return img_gray
 
 def parse_image(image):
-  rgb_image = mask_image(image)
+  rgb_image = mask_image(image, "RGB")
   img_tensor = tf.convert_to_tensor(rgb_image, dtype=tf.float32)
   img_resized = tf.image.resize_with_pad(img_tensor, 120, 160)
   img_gray = tf.image.rgb_to_grayscale(img_resized)
   return img_gray
 
-def mask_image(image):
+def mask_image(image, image_format="BGR"):
   image = cv2.resize(image, (160, 120))
 
-  hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
+  if image_format == "BGR":
+    hsv = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+  else:
+    hsv = cv2.cvtColor(image, cv2.COLOR_RGB2HSV)
+
   light_ya = np.array([17, 100, 44])
   dark_ya = np.array([35, 310, 150])
 
@@ -42,5 +46,6 @@ def mask_image(image):
   result[mask == 255] = [255, 255, 255]
 
   rgb_image = cv2.cvtColor(result, cv2.COLOR_HSV2RGB)
+  # cv2.imwrite("debug.png", rgb_image)
 
   return rgb_image
