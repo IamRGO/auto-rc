@@ -32,22 +32,23 @@ arduino = serial.Serial(port='/dev/ttyUSB0', baudrate=2400, timeout=1)
 input("press enter to begin driving...")
 last_fps = 0
 last_fps_time = time.time()
+last_capture_time = time.time()
 fps = 0
 
 while True:
-  print("taking a picture...", time.time())
   image = camera.capture_array()
 
   input_list = [
     data.parse_image(image)
   ]
 
-  print("running a prediction...", last_fps)
   result = model.predict(
     np.array(input_list, dtype=np.float32),
     verbose=0,
   )
 
+  duration_ms = int(time.time() - last_capture_time) * 1000
+  print("Processed...", last_fps, "fps", duration_ms, "ms")
   result = result[0]
   print(result)
 
