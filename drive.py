@@ -35,7 +35,7 @@ last_fps_time = time.time()
 fps = 0
 
 while True:
-  print("taking a picture...", time.now())
+  print("taking a picture...", time.time())
   image = camera.capture_array()
   image = imutils.resize(image, width=160)
 
