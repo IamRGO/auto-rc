@@ -33,7 +33,7 @@ input("press enter to begin driving...")
 while True:
   print("taking a picture...")
   image = camera.capture_array()
-  image = imutils.resize(image, width=320)
+  image = imutils.resize(image, width=160)
 
   input_list = [
     data.parse_image(image)
