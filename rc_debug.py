@@ -97,7 +97,7 @@ while flag:
     # print(file_index, "human", output_data)
 
     input_list = [
-        data.read_input(image_path)
+        data.read_input(mask_path)
     ]
 
     result = model.predict(
