@@ -43,7 +43,7 @@ while True:
     data.parse_image(image)
   ]
 
-  print("running a prediction...", fps)
+  print("running a prediction...", last_fps)
   result = model.predict(
     np.array(input_list, dtype=np.float32),
     verbose=0,
