@@ -49,7 +49,7 @@ while True:
   duration_ms = int((time.time() - last_capture_time) * 1000)
   last_capture_time = time.time()
   print("Processed...", last_fps, "fps", duration_ms, "ms")
-  result = result[0]
+  result = result.numpy()[0]
   print(result)
 
   steering_val = np.interp(result[0], [0, 1.0], [40, 130])
