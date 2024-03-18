@@ -3,6 +3,7 @@ import pygame
 pygame.init()
 import glob
 import os
+import time
 print("loading opencv...")
 import cv2
 print("loading numpy...")
@@ -77,7 +78,6 @@ while flag:
             delta = -1
 
         while file_index >= 0 and file_index < 9999999:
-            print(file_index)
             file_index += delta
             file_index = abs(file_index)
             image_path = "temp/frame_" + str(file_index) + ".png"
@@ -100,10 +100,15 @@ while flag:
         data.read_input(mask_path)
     ]
 
+    start_time = time.time()
     result = model.predict(
         np.array(input_list, dtype=np.float32),
         verbose=0
     )[0]
+
+    duration_ms = int((time.time() - start_time) * 1000)
+
+    print("Processed...", duration_ms, "ms")
 
     result = list(map(lambda x: round(x, 2), result))
 
