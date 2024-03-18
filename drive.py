@@ -12,14 +12,7 @@ import data
 from picamera2 import Picamera2
 import imutils
 
-
 print("Staring camera...")
-
-# camera = cv2.VideoCapture(-1)
-# camera.set(cv2.CAP_PROP_FRAME_WIDTH, 320)
-# camera.set(cv2.CAP_PROP_FRAME_HEIGHT, 240)
-# camera.set(cv2.CAP_PROP_FPS, 30)
-# camera.set(cv2.CAP_PROP_BUFFERSIZE, 1)
 
 camera = Picamera2()
 config = camera.create_preview_configuration(
@@ -39,11 +32,7 @@ arduino = serial.Serial(port='/dev/ttyUSB0', baudrate=9600, timeout=5)
 input("press enter to begin driving...")
 while True:
   print("taking a picture...")
-  # _, frame = camera.grab()  # read the camera frame
   image = camera.capture_array()
-  rgb = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
-  frame = imutils.resize(rgb, width=320)
-  image = cv2.resize(frame, (320, 240))
 
   input_list = [
     data.parse_image(image)
@@ -60,12 +49,7 @@ while True:
   print(result)
 
   steering_val = np.interp(result[0], [0, 1.0], [40, 130])
-  # throttle_val = np.interp(result[1], [0.0, 1.0], [90, 150])
-
-  # if result[1] == 0:
-  #     throttle_val = 0
-
-  throttle_val = 150
+  throttle_val = 130
 
   message = "D" + str(steering_val) + " " + str(throttle_val)
   arduino.write(message.encode("UTF-8"))
