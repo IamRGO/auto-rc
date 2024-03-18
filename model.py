@@ -8,7 +8,9 @@ def create_model():
         MaxPooling2D(),
         Conv2D(32, 3, padding='same', activation='relu'),
         MaxPooling2D(),
-        Conv2D(32, 3, padding='same', activation='relu'),
+        Conv2D(64, 3, padding='same', activation='relu'),
+        MaxPooling2D(),
+        Conv2D(64, 3, padding='same', activation='relu'),
         MaxPooling2D(),
 
         Flatten(),
