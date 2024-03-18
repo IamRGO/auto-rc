@@ -12,6 +12,8 @@ import data
 from picamera2 import Picamera2
 import imutils
 
+DESIRED_DELAY = 0.1
+
 print("Staring camera...")
 
 camera = Picamera2()
@@ -36,6 +38,7 @@ last_capture_time = time.time()
 fps = 0
 
 while True:
+  start_time = time.time()
   image = camera.capture_array()
 
   input_list = [
@@ -59,7 +62,10 @@ while True:
   arduino.write(message.encode("UTF-8"))
   fps += 1
 
-  time.sleep(0.05)
+  time_to_sleep = DESIRED_DELAY - (time.time() - start_time)
+
+  if time_to_sleep > 0:
+    time.sleep(time_to_sleep)
 
   if time.time() - last_fps_time > 1:
     last_fps = fps
