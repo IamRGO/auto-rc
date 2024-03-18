@@ -66,7 +66,6 @@ for image_path in file_list:
 
 input_list = np.array(input_list, dtype=np.float32)
 output_list = np.array(output_list, dtype=np.float32)
-breakpoint()
 model = m.create_model()
 
 terminate_signal = False
