@@ -12,9 +12,10 @@ def create_model():
         MaxPooling2D(),
         Conv2D(128, 3, padding='same', activation='relu'),
         MaxPooling2D(),
+        Conv2D(256, 3, padding='same', activation='relu'),
+        MaxPooling2D(),
 
         Flatten(),
-        Dense(512, activation='relu'),
         Dense(240, activation='relu'),
         Dense(32, activation='relu'),
         Dense(1, activation='sigmoid')
