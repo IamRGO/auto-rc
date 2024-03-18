@@ -8,12 +8,14 @@ def create_model():
         MaxPooling2D(),
         Conv2D(32, 3, padding='same', activation='relu'),
         MaxPooling2D(),
+        Conv2D(32, 3, padding='same', activation='relu'),
+        MaxPooling2D(),
 
         Flatten(),
-        # before was 1164, 512, 240
         Dense(1164, activation='relu'),
         Dense(512, activation='relu'),
         Dense(240, activation='relu'),
         Dense(1, activation='sigmoid')
     ])
+
     return model

@@ -9,7 +9,7 @@ def read_output(file_path):
 
   steering, throttle = data.split(":")
   steering = int(steering) # range 40, 131
-  steering = np.interp(steering, [40, 130], [0, 1.0])
+  steering = np.interp(steering, [40, 130], [0.0, 1.0])
 
   # throttle = int(throttle)
   # throttle = np.interp(throttle, [90, 135], [0.0, 1.0])
