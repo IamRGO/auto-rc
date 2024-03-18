@@ -110,7 +110,7 @@ print("training...")
 train_history = model.fit(
   input_list,
   output_list,
-  epochs=1000,
+  epochs=50,
   verbose=1,
   validation_split=0.1,
   callbacks=[TerminateOnFlag()]
