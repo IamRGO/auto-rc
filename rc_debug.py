@@ -38,20 +38,37 @@ while flag:
         if event.type == pygame.QUIT:
             flag = False
             break
-        if event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_LEFT:
-                last_key = "Left"
-            elif event.key == pygame.K_RIGHT:
-                last_key = "Right"
-            elif event.key == pygame.K_d:
-                print("image", file_index, "deleting...")
-                if (os.path.isfile(image_path) == True) and (os.path.isfile(mask_path) == True) and (os.path.isfile(data_path) == True):
-                    r_image_path = image_path
-                    r_mask_path = mask_path
-                    r_data_path = data_path
-                    skip = True
 
-                image_path = None
+        # if event.type == pygame.KEYDOWN:
+        #     if event.key == pygame.K_LEFT:
+        #         last_key = "Left"
+        #     elif event.key == pygame.K_RIGHT:
+        #         last_key = "Right"
+        #     elif event.key == pygame.K_d:
+        #         print("image", file_index, "deleting...")
+        #         if (os.path.isfile(image_path) == True) and (os.path.isfile(mask_path) == True) and (os.path.isfile(data_path) == True):
+        #             r_image_path = image_path
+        #             r_mask_path = mask_path
+        #             r_data_path = data_path
+        #             skip = True
+
+        #         image_path = None
+
+    keys = pygame.key.get_pressed()
+    if keys[pygame.K_LEFT]:
+        last_key = "Left"
+    elif keys[pygame.K_RIGHT]:
+        last_key = "Right"
+    elif keys[pygame.K_d]:
+        print("image", file_index, "deleting...")
+        if (os.path.isfile(image_path) == True) and (os.path.isfile(mask_path) == True) and (os.path.isfile(data_path) == True):
+            r_image_path = image_path
+            r_mask_path = mask_path
+            r_data_path = data_path
+            skip = True
+
+        image_path = None
+
 
     if (last_key in ["Left", "Right"]) or image_path == None:
         delta = 1
@@ -60,6 +77,7 @@ while flag:
             delta = -1
 
         while file_index >= 0 and file_index < 9999999:
+            print(file_index)
             file_index += delta
             file_index = abs(file_index)
             image_path = "temp/frame_" + str(file_index) + ".png"
@@ -84,7 +102,7 @@ while flag:
 
     result = model.predict(
         np.array(input_list, dtype=np.float32),
-        verbose=0,
+        verbose=0
     )[0]
 
     result = list(map(lambda x: round(x, 2), result))

@@ -61,7 +61,7 @@ void loop() {
         kick_start();
       }
       
-      throttle_val = map(data[1], 520, 980, 90, 135);
+      throttle_val = map(data[1], 520, 980, 90, 130);
       analogWrite(motor_a, throttle_val);
       analogWrite(motor_b, 0);
     } else {

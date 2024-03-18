@@ -53,7 +53,7 @@ for image_path in file_list:
   steering = output_data[0] * 100
   bucket_index = int(steering / bucket_size)
 
-  if bucket_list[bucket_index][1] > 500:
+  if bucket_list[bucket_index][1] > 300:
     continue
 
   bucket_list[bucket_index][1] += 1
@@ -61,6 +61,7 @@ for image_path in file_list:
   output_list.append(output_data)
 
   input_list.append(
+    print(image_path),
     data.read_input(image_path)
   )
 
