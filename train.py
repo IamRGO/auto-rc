@@ -2,7 +2,6 @@ import numpy as np
 import matplotlib.pyplot as plt
 import os
 import glob
-import copy
 
 import tensorflow as tf
 import model as m
@@ -86,8 +85,7 @@ class TerminateOnFlag(tf.keras.callbacks.Callback):
       self.model.stop_training = True
 
   def on_epoch_end(self, epoch, logs=None):
-    # if we are on Mac or have DISPLAY env variable set
-    if os.name != "posix" or ("DISPLAY" not in os.environ):
+    if os.name != "posix":
       return
 
     test_input_list = input_list[:200]
