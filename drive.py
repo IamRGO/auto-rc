@@ -48,6 +48,7 @@ while True:
   )
 
   duration_ms = int(time.time() - last_capture_time) * 1000
+  last_capture_time = time.time()
   print("Processed...", last_fps, "fps", duration_ms, "ms")
   result = result[0]
   print(result)
