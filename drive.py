@@ -37,7 +37,6 @@ fps = 0
 while True:
   print("taking a picture...", time.time())
   image = camera.capture_array()
-  image = imutils.resize(image, width=160)
 
   input_list = [
     data.parse_image(image)
