@@ -38,7 +38,7 @@ def mask_image(image):
   dark_ya = np.array([35, 310, 150])
 
   mask = cv2.inRange(hsv, light_ya, dark_ya)
-  result = cv2.bitwise_or(image, image, mask = mask)
+  result = cv2.bitwise_or(hsv, hsv, mask = mask)
   result[mask == 255] = [255, 255, 255]
 
   rgb_image = cv2.cvtColor(result, cv2.COLOR_HSV2RGB)

@@ -27,7 +27,7 @@ model = m.create_model()
 model.load_weights("brain")
 
 # connects to arduino
-arduino = serial.Serial(port='/dev/ttyUSB0', baudrate=2400, timeout=5)
+arduino = serial.Serial(port='/dev/ttyUSB0', baudrate=2400, timeout=1)
 
 input("press enter to begin driving...")
 while True:
@@ -45,7 +45,6 @@ while True:
   )
 
   result = result[0]
-
   print(result)
 
   steering_val = np.interp(result[0], [0, 1.0], [40, 130])

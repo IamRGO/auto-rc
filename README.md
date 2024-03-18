@@ -1,6 +1,6 @@
 Install these:
 
-pip3 install opencv-python numpy
+pip3 install imutils pyserial opencv-python numpy matplotlib tensorflow==2.13.1
 
 ssh -i ~/.ssh/id_rsa  michael@192.168.2.200
 
