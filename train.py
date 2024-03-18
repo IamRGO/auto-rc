@@ -61,7 +61,6 @@ for image_path in file_list:
   output_list.append(output_data)
 
   input_list.append(
-    print(image_path),
     data.read_input(image_path)
   )
 
