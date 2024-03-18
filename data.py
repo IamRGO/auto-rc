@@ -2,6 +2,9 @@ import tensorflow as tf
 import cv2
 import numpy as np
 
+IMAGE_WIDTH = 80
+IMAGE_HEIGHT = 60
+
 def read_output(file_path):
   file = open(file_path, 'r')
   data = file.read()
@@ -19,19 +22,19 @@ def read_output(file_path):
 def read_input(file_path):
   image = cv2.imread(file_path)
   img_tensor = tf.convert_to_tensor(image, dtype=tf.float32)
-  img_resized = tf.image.resize_with_pad(img_tensor, 120, 160)
+  img_resized = tf.image.resize_with_pad(img_tensor, IMAGE_HEIGHT, IMAGE_WIDTH)
   img_gray = tf.image.rgb_to_grayscale(img_resized)
   return img_gray
 
 def parse_image(image):
   rgb_image = mask_image(image, "RGB")
   img_tensor = tf.convert_to_tensor(rgb_image, dtype=tf.float32)
-  img_resized = tf.image.resize_with_pad(img_tensor, 120, 160)
+  img_resized = tf.image.resize_with_pad(img_tensor, IMAGE_HEIGHT, IMAGE_WIDTH)
   img_gray = tf.image.rgb_to_grayscale(img_resized)
   return img_gray
 
 def mask_image(image, image_format="BGR"):
-  image = cv2.resize(image, (160, 120))
+  image = cv2.resize(image, (IMAGE_WIDTH, IMAGE_HEIGHT))
 
   if image_format == "BGR":
     hsv = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
