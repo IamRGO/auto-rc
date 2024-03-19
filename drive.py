@@ -12,7 +12,7 @@ import data
 from picamera2 import Picamera2
 import imutils
 
-DESIRED_DELAY = 0.1
+DESIRED_DELAY = 0.185
 
 print("Staring camera...")
 
@@ -55,16 +55,23 @@ while True:
   result = result.numpy()[0]
   print(result)
 
+  throttle_val = 114
+
+  if int(result[0] * 100) in range(25, 35):
+    print("SLOW DOWN!!!")
+    throttle_val = 81
+
   steering_val = np.interp(result[0], [0, 1.0], [40, 130])
-  throttle_val = 0
 
   message = "D" + str(steering_val) + " " + str(throttle_val)
   arduino.write(message.encode("UTF-8"))
   fps += 1
 
   time_to_sleep = DESIRED_DELAY - (time.time() - start_time)
+  time_to_sleep = 0.04
 
   if time_to_sleep > 0:
+    print("Sleep!", time_to_sleep)
     time.sleep(time_to_sleep)
 
   if time.time() - last_fps_time > 1:
