@@ -55,7 +55,7 @@ while True:
   result = result.numpy()[0]
   print(result)
 
-  throttle_val = 114
+  throttle_val = 111
 
   if int(result[0] * 100) in range(25, 35):
     print("SLOW DOWN!!!")
