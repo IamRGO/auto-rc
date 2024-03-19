@@ -28,7 +28,7 @@ void setup() {
 
 void loop() {
   if (Serial.available()) {
-    String input_data = Serial.readString();
+    String input_data = Serial.readStringUntil('\n');
     input_data.trim();
 
     if (input_data.charAt(0) == 'D') {

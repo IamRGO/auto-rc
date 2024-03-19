@@ -63,7 +63,7 @@ while True:
 
   steering_val = np.interp(result[0], [0, 1.0], [40, 130])
 
-  message = "D" + str(steering_val) + " " + str(throttle_val)
+  message = "D" + str(steering_val) + " " + str(throttle_val) + "\n"
   arduino.write(message.encode("UTF-8"))
   fps += 1
 
