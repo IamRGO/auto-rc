@@ -68,7 +68,7 @@ while True:
   fps += 1
 
   time_to_sleep = DESIRED_DELAY - (time.time() - start_time)
-  time_to_sleep = 0.04
+  time_to_sleep = 0.0
 
   if time_to_sleep > 0:
     print("Sleep!", time_to_sleep)
