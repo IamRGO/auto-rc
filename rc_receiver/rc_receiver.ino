@@ -37,7 +37,7 @@ void setup() {
 }
 
 void kick_start() {
-  analogWrite(motor_a, 160);
+  analogWrite(motor_a, 180);
   analogWrite(motor_b, 0);
   delay(500);
 }
@@ -61,7 +61,7 @@ void loop() {
         kick_start();
       }
       
-      throttle_val = map(data[1], 520, 980, 90, 130);
+      throttle_val = map(data[1], 520, 980, 90, 180);
       analogWrite(motor_a, throttle_val);
       analogWrite(motor_b, 0);
     } else {
