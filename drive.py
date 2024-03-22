@@ -55,11 +55,11 @@ while True:
   result = result.numpy()[0]
   print(result)
 
-  throttle_val = 175
+  throttle_val = 176
 
   if int(result[0] * 100) in range(15, 35):
     print("SLOW DOWN!!!")
-    throttle_val = 43
+    throttle_val = 42
 
   steering_val = np.interp(result[0], [0, 1.0], [40, 130])
 
