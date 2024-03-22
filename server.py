@@ -23,7 +23,7 @@ def get_frames():
     while True:
         image = camera.capture_array()
         rgb = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
-        frame = imutils.resize(rgb, width=100)
+        frame = imutils.resize(rgb, width=200)
         frame_count += 1
 
         cv2.putText(frame, f'FPS: {last_fps}', (10, 30), font, 1, (0, 255, 0), 2, cv2.LINE_AA)
