@@ -37,7 +37,7 @@ def mask_image(image, image_format="BGR"):
   image = cv2.resize(image, (IMAGE_WIDTH, IMAGE_HEIGHT))
 
   if image_format == "BGR":
-    hsv = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+    hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
   else:
     hsv = cv2.cvtColor(image, cv2.COLOR_RGB2HSV)
 
