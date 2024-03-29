@@ -54,17 +54,17 @@ while True:
   last_capture_time = time.time()
   result = result.numpy()[0]
 
-  throttle_val = 145
-  corner_delta = 110
+  throttle_val = 145 - 11
+  corner_delta = 110 - 12
 
   if int(result[0] * 100) in range(25, 35):
-    throttle_val = corner_delta + 35
+    throttle_val = corner_delta + 40
     print("SLOW DOWN - A", throttle_val)
   elif int(result[0] * 100) in range(0, 25):
-    throttle_val = corner_delta + 25
+    throttle_val = corner_delta + 33
     print("SLOW DOWN - B", throttle_val)
   elif int(result[0] * 100) in range(80, 130):
-    throttle_val = corner_delta + 45
+    throttle_val = corner_delta + 47
     print("SLOW DOWN - C", throttle_val)
 
   steering_val = np.interp(result[0], [0, 1.0], [40, 130])
