@@ -17,7 +17,7 @@ print("Staring camera...")
 camera = Picamera2()
 config = camera.create_preview_configuration(
     main={ "size": (int(3280/4), int(2464/4)) },
-    # buffer_count=1,
+    buffer_count=2,
     queue=False,
 )
 camera.configure(config)
@@ -36,6 +36,7 @@ last_fps = 0
 last_fps_time = time.time()
 last_capture_time = time.time()
 fps = 0
+last_throttle_val = 0
 
 while True:
   start_time = time.time()
@@ -51,19 +52,25 @@ while True:
 
   duration_ms = int((time.time() - last_capture_time) * 1000)
   last_capture_time = time.time()
-  print("Processed...", last_fps, "fps", duration_ms, "ms")
   result = result.numpy()[0]
-  print(result)
 
-  throttle_val = 176
+  throttle_val = 145
+  corner_delta = 110
 
-  if int(result[0] * 100) in range(15, 35):
-    print("SLOW DOWN!!!")
-    throttle_val = 42
+  if int(result[0] * 100) in range(25, 35):
+    throttle_val = corner_delta + 35
+    print("SLOW DOWN - A", throttle_val)
+  elif int(result[0] * 100) in range(0, 25):
+    throttle_val = corner_delta + 25
+    print("SLOW DOWN - B", throttle_val)
+  elif int(result[0] * 100) in range(80, 130):
+    throttle_val = corner_delta + 45
+    print("SLOW DOWN - C", throttle_val)
 
   steering_val = np.interp(result[0], [0, 1.0], [40, 130])
 
   message = "D" + str(steering_val) + " " + str(throttle_val) + "\n"
+  arduino.flush()
   arduino.write(message.encode("UTF-8"))
   fps += 1
 
@@ -71,3 +78,4 @@ while True:
     last_fps = fps
     last_fps_time = time.time()
     fps = 0
+    print("Processed...", last_fps, "fps", duration_ms, "ms", result)
